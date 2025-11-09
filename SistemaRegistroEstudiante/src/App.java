@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class App {
 
-    // Atributos del estudiante
+    // Atributos
     private static String nombreEstudiante = "N/A";
     private static double nota1 = -1;
     private static double nota2 = -1;
@@ -23,15 +23,16 @@ public class App {
         System.out.println("5. Limpiar datos del estudiante actual");
         System.out.println("0. Salir");
         System.out.print("Ingrese su opción: ");
+        System.out.println("\n");
 
     }
 
     public static int leerEntero(Scanner sc){
 
-        int numero;
         while (true) {  
+
             if (sc.hasNextInt()) {
-                numero = sc.nextInt();
+                int numero = sc.nextInt();
                 sc.nextLine(); // limpiar buffer
                 return numero; // retorno válido
             } else {
@@ -43,7 +44,7 @@ public class App {
 
     public static void  registrarEstudiante(Scanner sc){
 
-        System.out.println("\n--- Registro de Estudiante ---");
+        System.out.println("\n--- Registro de Estudiante ---\n");
 
         // Pedir nombre
         System.out.print("Ingrese el nombre del estudiante: ");
@@ -75,12 +76,13 @@ public class App {
 
     public static double leerNota(Scanner sc, int numeroNota){
 
-        double nota;
+
         while (true) {
+
             System.out.print("Ingrese la nota " + numeroNota + ": ");
             String linea = sc.nextLine().replace(",", ".");
 
-            nota = Double.parseDouble(linea);
+            double nota = Double.parseDouble(linea);
             if (validarNota(nota)) {
                  return nota;
             } else {
@@ -97,7 +99,7 @@ public class App {
 
     public static void mostrarDatosEstudiante() {
 
-        System.out.println("\n--- Datos del Estudiante Actual ---");
+        System.out.println("\n--- Datos del Estudiante Actual ---\n");
         
         if (nombreEstudiante.equals("N/A")) {
             System.out.println("No hay datos de estudiante registrados actualmente.");
@@ -112,7 +114,7 @@ public class App {
 
     public static void calcularPromedio() {
 
-        System.out.println("\n--- Promedio de Notas ---");
+        System.out.println("\n--- Promedio de Notas ---\n");
         
         if (nombreEstudiante.equals("N/A")) {
             System.out.println("Advertencia: No hay datos de estudiante registrados.");
@@ -129,7 +131,7 @@ public class App {
     }
 
     public static void mostrarResumenEstudiante() {
-        System.out.println("\n--- Resumen del Estudiante ---");
+        System.out.println("\n--- Resumen del Estudiante ---\n");
         
         if (nombreEstudiante.equals("N/A")) {
             System.out.println("No hay datos de estudiante registrados actualmente.");
@@ -148,6 +150,7 @@ public class App {
     }
 
     public static void limpiarDatos() {
+
         nombreEstudiante = "N/A";
         nota1 = -1;
         nota2 = -1;
