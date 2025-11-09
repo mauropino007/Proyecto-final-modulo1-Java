@@ -20,19 +20,43 @@ public class App {
         System.out.println("5. Limpiar datos del producto actual");
         System.out.println("0. Salir");
         System.out.print("Ingrese su opción: ");
+
     }
 
     public static int leerEntero(Scanner sc){
 
-        int numero;
         while (true) {  
+
             if (sc.hasNextInt()) {
-                numero = sc.nextInt();
+
+                int numero = sc.nextInt();
                 sc.nextLine(); // limpiar buffer
                 return numero; // retorno válido
+
             } else {
+
                 System.out.println("número no inválido. Por favor ingrese un número entero.");
                 sc.nextLine(); // limpiar entrada incorrecta
+
+            }
+        }
+    }
+
+    public static double leerDecimales(Scanner sc){
+
+        while (true) {  
+
+            if (sc.hasNextInt()) {
+
+                double numero =  sc.nextDouble();
+                sc.nextLine(); // limpiar buffer
+                return numero; // retorno válido
+
+            } else {
+
+                System.out.println("número no inválido. Por favor ingrese un número entero.");
+                sc.nextLine(); // limpiar entrada incorrecta
+
             }
         }
     }
@@ -47,32 +71,114 @@ public class App {
 
         if (!validarProducto(nombre)) {
             System.out.println("Error: El nombre no puede estar vacío.");
-            return;
+            return; 
         }
 
-        System.out.print("Ingrese el precio unitario: ");
-        double precio = Double.parseDouble(sc.nextLine());
+        System.out.print("Ingrese el precio unitario del producto: ");
+        double precio = leerDecimales(sc);
 
         if (!validarPrecio(precio)) {
             System.out.println("El precio debe ser mayor que 0. Intente nuevamente.");
-        }
+            return;
+        }1
 
-        System.out.print("Ingrese el precio unitario: ");
-        int cantidad = Integer.parseInt(sc.nextLine());
+        System.out.print("Ingrese la cantidad en inventario del producto: ");
+        int cantidad = leerEntero(sc);
 
         if (!validarCantidad(cantidad)) {
             System.out.println("La cantidad no puede ser negativa. Intente nuevamente.");
+            return;
         }
 
         // Guardar datos
         nombreProducto = nombre;
         precioUnitario = precio;
         cantidadInventario = cantidad;
-        
+
         System.out.println("Producto registrado exitosamente");
 
     }
  
+    public static boolean validarPrecio(double precio) {
+
+        return precio > 0;
+
+    }
+
+    public static boolean validarCantidad(int cantidad) {
+
+        return cantidad >= 0;
+
+    }
+
+    public static boolean validarProducto(String nombre) {
+
+        return nombre != null && !nombre.trim().isEmpty();
+
+    }
+
+    public static void mostrarInformacionProducto() {
+
+        if (nombreProducto.equals("N/A")) {
+
+            System.out.println("No hay datos de producto registrados actualmente.");
+
+        } else {
+
+            System.out.println("--- Información del Producto ---");
+            System.out.println("Nombre: " + nombreProducto);
+            System.out.printf("Precio Unitario: $%,.2f%n", precioUnitario);
+            System.out.println("Cantidad en Inventario: " + cantidadInventario);
+
+        }
+    }
+
+    public static double mostrarValorTotalInventario() {
+
+        if (nombreProducto.equals("N/A")) {
+            System.out.println("No hay datos de producto registrados. Registre un producto primero.");
+            return 0.0;
+        }
+
+        double valorTotal = precioUnitario * cantidadInventario;
+        System.out.printf("Valor total del inventario: $%,.2f%n", valorTotal);
+        return valorTotal;
+    }
+
+    public static void mostrarResumenCompletoProducto() {
+
+        if (nombreProducto.equals("N/A")) {
+            System.out.println("No hay datos de producto registrados actualmente.");
+            return;
+        }
+
+        double valorTotal = precioUnitario * cantidadInventario;
+        String estadoStock = "";
+
+        if (cantidadInventario < 5) {
+            estadoStock = "Stock bajo";
+        } else if (cantidadInventario >= 5 && cantidadInventario <= 20) {
+            estadoStock = "Stock suficiente";
+        } else if (cantidadInventario > 20) {
+            estadoStock = "Stock alto";
+        }
+
+        System.out.println("\n--- Resumen del Producto ---");
+        System.out.println("Nombre: " + nombreProducto);
+        System.out.printf("Precio Unitario: $%,.2f%n", precioUnitario);
+        System.out.println("Cantidad en Inventario: " + cantidadInventario);
+        System.out.printf("Valor Total en Inventario: $%,.2f%n", valorTotal);
+        System.out.println("Estado del Stock: " + estadoStock);
+    } 
+
+    public static void limpiarDatosProducto() {
+
+        nombreProducto = "N/A";
+        precioUnitario = 0.0;
+        cantidadInventario = 0;
+        System.out.println("Los datos del producto actual han sido borrados exitosamente.");
+
+    }
     public static void main(String[] args) throws Exception {
 
         Scanner sc = new Scanner(System.in);
@@ -93,16 +199,17 @@ public class App {
                     mostrarValorTotalInventario();
                     break;
                 case 4:
-                    mostrarResumenCompleto();
+                    mostrarResumenCompletoProducto();
                     break;
                 case 5:
                     limpiarDatosProducto();
                     break;
                 case 0:
-                    System.out.println("\n¡Gracias por usar el sistema! Hasta pronto.");
+                    System.out.println("Saliendo del sistema...");
                     break;
                 default:
-                    System.out.println("\nOpción inválida. Por favor intente nuevamente.");
+                    System.out.println("Opción inválida. Intente nuevamente.");
+                    break;
             }
                
         } while (opcion != 0);
