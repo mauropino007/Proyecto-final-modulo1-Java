@@ -19,7 +19,9 @@ public class App {
         System.out.println("4. Mostrar resumen completo del producto");
         System.out.println("5. Limpiar datos del producto actual");
         System.out.println("0. Salir");
-        System.out.print("Ingrese su opción: ");
+        System.out.print("Ingrese su opción:  ");
+        System.out.println("\n");
+        
 
     }
 
@@ -63,7 +65,7 @@ public class App {
  
     public static void  registroProducto(Scanner sc){
 
-        System.out.println("\n--- Registro de Nuevo Producto ---");
+        System.out.println("\n--- Registro de Nuevo Producto ---\n");
 
         // Pedir nombre del producto
         System.out.print("Ingrese el nombre del producto: ");
@@ -80,7 +82,7 @@ public class App {
         if (!validarPrecio(precio)) {
             System.out.println("El precio debe ser mayor que 0. Intente nuevamente.");
             return;
-        }1
+        }
 
         System.out.print("Ingrese la cantidad en inventario del producto: ");
         int cantidad = leerEntero(sc);
@@ -125,7 +127,7 @@ public class App {
 
         } else {
 
-            System.out.println("--- Información del Producto ---");
+            System.out.println("\n--- Información del Producto ---\n");
             System.out.println("Nombre: " + nombreProducto);
             System.out.printf("Precio Unitario: $%,.2f%n", precioUnitario);
             System.out.println("Cantidad en Inventario: " + cantidadInventario);
@@ -163,7 +165,7 @@ public class App {
             estadoStock = "Stock alto";
         }
 
-        System.out.println("\n--- Resumen del Producto ---");
+        System.out.println("\n--- Resumen del Producto ---\n");
         System.out.println("Nombre: " + nombreProducto);
         System.out.printf("Precio Unitario: $%,.2f%n", precioUnitario);
         System.out.println("Cantidad en Inventario: " + cantidadInventario);

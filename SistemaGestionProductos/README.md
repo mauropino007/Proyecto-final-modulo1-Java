@@ -1,3 +1,3 @@
-# Sistema Básico de Registro de Estudiantes
+# Sistema Básico de Gestión de Productos
 
-Este proyecto forma parte del Módulo 1 y tiene como objetivo consolidar los conocimientos básicos de programación en Java mediante la creación de un sistema de consola que permite registrar, consultar y calcular el promedio de notas de un estudiante.
+Este proyecto te permitirá consolidar todos los conocimientos del Módulo 1, aplicando funciones, estructuras condicionales, bucles, validaciones y variables estáticas para gestionar información de productos en una tienda.
